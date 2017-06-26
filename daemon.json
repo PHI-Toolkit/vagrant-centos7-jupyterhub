@@ -1,0 +1,5 @@
+{
+  "graph": "/var/lib/docker",
+  "storage-driver": "devicemapper",
+  "storage-opt": "dm.basesize=20G"
+}

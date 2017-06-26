@@ -1,0 +1,35 @@
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+FROM jupyterhub/jupyterhub-onbuild:0.7.0
+
+# Install dockerspawner and its dependencies
+RUN /opt/conda/bin/pip install \
+    oauthenticator==0.5.* \
+    dockerspawner
+    # dockerspawner==0.5.*
+
+RUN pip install jupyterhub-dummyauthenticator
+
+# install docker on the jupyterhub container
+RUN wget https://get.docker.com -q -O /tmp/getdocker && \
+    chmod +x /tmp/getdocker && \
+    sh /tmp/getdocker
+
+# Copy TLS certificate and key
+ENV SSL_CERT /srv/jupyterhub/secrets/jupyterhub.crt
+ENV SSL_KEY /srv/jupyterhub/secrets/jupyterhub.key
+ENV CONFIGPROXY_AUTH_TOKEN `openssl rand -hex 32`
+RUN echo `openssl rand -hex 32` > /etc/proxy_token
+
+COPY ./secrets/jupyterhub.crt $SSL_CERT
+COPY ./secrets/jupyterhub.key $SSL_KEY
+RUN chmod 700 /srv/jupyterhub/secrets && \
+    chmod 600 /srv/jupyterhub/secrets/*
+
+COPY ./userlist /srv/jupyterhub/userlist
+
+RUN git clone https://github.com/ryanlovett/imagespawner.git && \
+    cp imagespawner/imagespawner.py /srv/jupyterhub && \
+    cd /srv/jupyterhub
+
+EXPOSE 8000 443

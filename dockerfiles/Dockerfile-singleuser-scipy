@@ -1,0 +1,66 @@
+FROM jupyter/scipy-notebook:bb222f49222e
+MAINTAINER herman.tolentino@gmail.com
+
+# some housekeeping
+USER root
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN ln -sf /bin/bash /bin/sh && \
+    mkdir -p /srv/scripts && \
+    mkdir -p /srv/nbgrader/exchange && \
+    chown -R $NB_USER /srv/nbgrader/exchange && \
+    ln -s /bin/tar /bin/gtar
+
+# install jupyterlab, jupyter_client
+RUN conda install -c conda-forge jupyterlab ipywidgets && \
+    conda install jupyter_client && \
+    jupyter serverextension enable --py jupyterlab --sys-prefix
+
+RUN conda update notebook jupyterhub jupyterlab
+
+RUN apt-get update && \
+    apt-get install -y libpq-dev libssl-dev libsasl2-dev libssh2-1-dev \
+      libmariadb-client-lgpl-dev mongodb-clients poppler-utils nano \
+      postgresql-client sqlite3 mariadb-client python-mysqldb gdal-bin
+
+RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    chmod a+w -R /opt/conda && \
+    conda install conda-build && \
+    conda clean -tipsy
+
+# Python Geoserver API
+RUN source activate /opt/conda/envs/python2 && \
+    cd /tmp && \
+    git clone https://github.com/boundlessgeo/gsconfig.git && \
+    cd gsconfig && \
+    python setup.py install && \
+    cd .. && \
+    python -m geoserver.catalog && \
+    rm -fvR gsconfig && \
+    cd /home/jovyan/work && \
+    source deactivate
+
+USER jovyan
+
+RUN mkdir -p /home/jovyan/work/notebooks && \
+    mkdir -p /home/jovyan/work/shared && \
+    mkdir -p /home/jovyan/work/modules && \
+    mkdir -p /home/jovyan/work/geoserver && \
+    mkdir -p /home/jovyan/.local/share && \
+    sudo chown -R jovyan:users /home/jovyan/work/shared && \
+    sudo chown -R jovyan:users /home/jovyan/work/modules && \
+    sudo chown -R jovyan:users /home/jovyan/work/geoserver && \
+    sudo chown -R jovyan:users /home/jovyan/work/notebooks && \
+    sudo chmod a+w -R /home/jovyan/work/shared && \
+    sudo chmod a+w -R /home/jovyan/work/modules && \
+    sudo chmod a+w -R /home/jovyan/work/geoserver && \
+    sudo chmod a+w -R /home/jovyan/work/notebooks && \
+    sudo chmod a+w -R /home/jovyan/.local/
+
+COPY ./permissions.sh /srv/permissions.sh
+COPY ./notebooks/HelloWorld.ipynb /home/jovyan/work/
+COPY ./notebooks/Shared-Notebook.ipynb /home/jovyan/work/shared/
+
+WORKDIR /home/jovyan/work
+#VOLUME ['/home/jovyan/work/modules', '/home/jovyan/work/shared', '/home/jovyan/work/geoserver']
