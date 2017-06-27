@@ -22,7 +22,7 @@ RUN conda update notebook jupyterhub jupyterlab
 RUN apt-get update && \
     apt-get install -y libpq-dev libssl-dev libsasl2-dev libssh2-1-dev \
       libmariadb-client-lgpl-dev mongodb-clients poppler-utils nano \
-      postgresql-client sqlite3 mariadb-client python-mysqldb gdal-bin
+      postgresql-client sqlite3 mariadb-client python-mysqldb gdal-bin gfortran
 
 RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chmod a+w -R /opt/conda && \
@@ -41,26 +41,29 @@ RUN source activate /opt/conda/envs/python2 && \
     cd /home/jovyan/work && \
     source deactivate
 
-USER jovyan
-
 RUN mkdir -p /home/jovyan/work/notebooks && \
     mkdir -p /home/jovyan/work/shared && \
     mkdir -p /home/jovyan/work/modules && \
     mkdir -p /home/jovyan/work/geoserver && \
-    mkdir -p /home/jovyan/.local/share && \
-    sudo chown -R jovyan:users /home/jovyan/work/shared && \
-    sudo chown -R jovyan:users /home/jovyan/work/modules && \
-    sudo chown -R jovyan:users /home/jovyan/work/geoserver && \
-    sudo chown -R jovyan:users /home/jovyan/work/notebooks && \
-    sudo chmod a+w -R /home/jovyan/work/shared && \
-    sudo chmod a+w -R /home/jovyan/work/modules && \
-    sudo chmod a+w -R /home/jovyan/work/geoserver && \
-    sudo chmod a+w -R /home/jovyan/work/notebooks && \
-    sudo chmod a+w -R /home/jovyan/.local/
+    mkdir -p /home/jovyan/.local/share
 
 COPY ./permissions.sh /srv/permissions.sh
 COPY ./notebooks/HelloWorld.ipynb /home/jovyan/work/
 COPY ./notebooks/Shared-Notebook.ipynb /home/jovyan/work/shared/
+COPY ./dockerfiles/*.sh /home/jovyan/work/modules/
+
+RUN chmod a+w -R /home/jovyan/work/shared && \
+    chmod a+w -R /home/jovyan/work/modules && \
+    chmod a+w -R /home/jovyan/work/geoserver && \
+    chmod a+w -R /home/jovyan/work/notebooks && \
+    chmod a+w -R /home/jovyan/.local/
+
+RUN chown -R jovyan:users /home/jovyan/work/shared && \
+    chown -R jovyan:users /home/jovyan/work/modules && \
+    chown -R jovyan:users /home/jovyan/work/geoserver && \
+    chown -R jovyan:users /home/jovyan/work/notebooks
+
+USER jovyan
 
 WORKDIR /home/jovyan/work
 #VOLUME ['/home/jovyan/work/modules', '/home/jovyan/work/shared', '/home/jovyan/work/geoserver']

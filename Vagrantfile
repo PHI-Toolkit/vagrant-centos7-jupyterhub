@@ -25,8 +25,12 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 443, host: 9443
-  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 8000, host: 8001
 
+  # Configure disk size
+  # Install vagrant disk-size plugin first (works only for Ubuntu):
+  # $ vagrant plugin install vagrant-disksize
+  config.disksize.size = '100GB'
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
@@ -54,18 +58,6 @@ Vagrant.configure("2") do |config|
      vb.memory = "16384"
      vb.cpus = 2
      vb.customize ["modifyvm", 'centos7', "--cpuexecutioncap", "50"]
-     if ARGV[0] == "up" && ! File.exist?("/data/vagrant/centos7.vdi")
-       vb.customize "pre-boot", ['createhd',
-                     '--filename', "/data/vagrant/centos7.vdi",
-                     '--format', 'VDI',
-                     '--size', 307200]
-       vb.customize "pre-boot", ['storageattach', :id,
-                     '--storagectl', 'SATA',
-                     '--port', 0,
-         '--device', 0,
-                     '--type', 'hdd',
-         '--medium', "/data/vagrant/centos7.vdi"]
-     end
   end
   #
   # View the documentation for the provider you are using for more
