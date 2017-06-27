@@ -80,5 +80,6 @@ To install the rest of the Python 2/3 modules and R, launch a terminal from Jupy
 ## Beyond testing...
 Things to configure:
 1. GitHub OAuth - You can put the correct client ID, secret key and callback URL in the ".env" file. Uncomment the OAuth sections of "jupyterhub_config.py" and comment the dummy authenticator.
-2. You might need a domain name for #1 for the callback URL.
-3. You can put the service behind an nginx or apache proxy.
+2. Get Letsencrypt certificate and key and replace the self-signed certificate and key in the "secrets" directory inside the VM.
+3. You might need a domain name for #1 for the callback URL.
+4. You can put the service behind an nginx or apache proxy.
