@@ -10,11 +10,13 @@ This VM was created for the 2017 Growing Expertise in E-Health Knowledge and Ski
 ## Customizing Vagrantfile:
 
 ### Forwarded ports
-
+Port 443 and 8000 are standard ports for JupyterHub. Expose the same ports on the VM.
 > config.vm.network "forwarded_port", guest: 443, host: 9443
+
 > config.vm.network "forwarded_port", guest: 8000, host: 8001
 
 ### IP Address
+Be sure to change this to an IP address compatible with your network. The "bridge" is the name of the network device on the computer system where the VM is hosted.
 > config.vm.network "public_network", ip: "192.168.50.200", bridge: "enp0s31f6"
 
 ### Disk size
@@ -25,7 +27,7 @@ Then adjust the size of the disk in GB, considering how much storage is availabl
 > config.disksize.size = '100GB'
 
 ### Memory
-VM memory is configured for 16GB. You can change this to accommodate available memory in your computer system.
+VM memory is configured for 16GB with the value below. You can change this to accommodate available memory in your computer system.
 > vb.memory = "16384"
 
 ### Shell provisioners
