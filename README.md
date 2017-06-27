@@ -1,11 +1,12 @@
 # Vagrant Centos-7 VirtualBox with Docker-based JupyterHub and Jupyter Notebooks
 
-This VM was created for the 2017 Growing Expertise in E-Health Knowledge and Skills (GEEKS) Program in Bangkok, Thailand.
+This VM was created as a template for the 2017 Growing Expertise in E-Health Knowledge and Skills (GEEKS) Program in Bangkok, Thailand. Assuming you are able to put in the right configuration items below, all you need to do is type "vagrant up" at the command line and after 10 minutes, you will have JupyterHub and Jupyter Notebook available on the browser.
 
 ## Requirements behind this setup
-1. Centos-7 VM (replicate the GEEKS training server)
+1. Centos-7 VM set up using Vagrant (to replicate the GEEKS training server in Thailand)
 2. JupyterHub with DockerSpawner
-3. Jupyter Notebook  with Python 2 and 3 kernels
+3. Jupyter Notebook with Python 2 and 3 kernels
+4. Option to load more Python 2/3 modules and the R kernel
 
 ## Customizing Vagrantfile:
 
@@ -39,7 +40,7 @@ This set up uses two provisioners:
 > config.vm.provision "shell", path: "./jupyterhub.sh"
 
 ## Running the Vagrantfile
-This is not intended to be a tutorial on Vagrant. You can use four commands to manage the Vagrant VM:
+This is not intended to be a tutorial on Vagrant but you can get by with four Vagrant commands to manage the Vagrant VM:
 
 1. "vagrant up --provision": This sets up the VM using the specifications in the Vagrantfile and runs the shell provisioners (see above). This takes a while to implement, and include building the two Docker images mentioned above. Once completed (back to shell prompt), you can go to your browser and type this URL: http://(IP-Address-in-Vagrantfile):8000. Make sure you use the same IP address you used in the Vagrantfile.
 2. "vagrant halt": This stops the VM.
@@ -64,3 +65,20 @@ Once inside the VM (after "vagrant ssh") you can manage the JupyterHub and Jupyt
 > $ docker-compose down
 
 "docker-compose up" brings up the JupyterHub server.
+
+To install the rest of the Python 2/3 modules and R, launch a terminal from Jupyter Notebook, and on the command prompt, type:
+
+> $ cd modules
+
+> ~/modules$ ./load-python-modules.sh
+
+> ~/modules$ ./load-mran-r.sh
+
+> ~/modules$ ./load-r-modules.sh
+
+
+## Beyond testing...
+Things to configure:
+1. GitHub OAuth - You can put the correct client ID, secret key and callback URL in the ".env" file. Uncomment the OAuth sections of "jupyterhub_config.py" and comment the dummy authenticator.
+2. You might need a domain name for #1 for the callback URL.
+3. You can put the service behind an nginx or apache proxy.
