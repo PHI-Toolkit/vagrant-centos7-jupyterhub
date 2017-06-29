@@ -17,7 +17,7 @@ Port 443 and 8000 are standard ports for JupyterHub. Expose the same ports on th
 > config.vm.network "forwarded_port", guest: 8000, host: 8001
 
 ### IP Address
-Be sure to change this to an IP address compatible with your network. The "bridge" is the name of the network device on the computer system where the VM is hosted.
+Be sure to change this to an IP address compatible with your network. The "bridge" is the name of the network device on the computer system where the VM is hosted. Use "ifconfig" to identify the name of the network device to replace the "enp0s31f6" below.
 > config.vm.network "public_network", ip: "192.168.50.200", bridge: "enp0s31f6"
 
 ### Disk size
