@@ -4,7 +4,7 @@ This turnkey Virtual Machine (VM) set up framework was created as a template for
 
 ## Requirements behind this setup
 1. Centos-7 VM set up using [Vagrant](https://www.vagrantup.com/) (to replicate the GEEKS training server in Thailand)
-2. [JupyterHub](https://github.com/jupyterhub/jupyterhub) with DockerSpawner
+2. [JupyterHub](https://github.com/jupyterhub/jupyterhub) with [DockerSpawner](https://github.com/jupyterhub/dockerspawner)
 3. [Jupyter](http://jupyter.org/) Notebook with Python 2 and 3 kernels
 4. Option to load more Python 2/3 modules and the R kernel
 
