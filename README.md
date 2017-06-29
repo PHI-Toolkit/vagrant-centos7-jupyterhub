@@ -40,7 +40,7 @@ This set up uses two provisioners:
 > config.vm.provision "shell", path: "./jupyterhub.sh"
 
 ## Running the Vagrantfile
-This is not intended to be a tutorial on Vagrant but you can get by with four Vagrant commands to manage the Vagrant VM:
+This is not intended to be a [tutorial](https://www.vagrantup.com/intro/getting-started/index.html) on Vagrant but you can get by with four Vagrant commands to manage the Vagrant VM:
 
 1. "vagrant up --provision": This sets up the VM using the specifications in the Vagrantfile and runs the shell provisioners (see above). This takes a while to implement, and include building the two Docker images mentioned above. Once completed (back to shell prompt), you can go to your browser and type this URL: http://(IP-Address-in-Vagrantfile):8000. Make sure you use the same IP address you used in the Vagrantfile.
 2. "vagrant halt": This stops the VM.
