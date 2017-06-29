@@ -1,4 +1,4 @@
-# Vagrant Centos-7 VirtualBox with Docker-based JupyterHub and Jupyter Notebooks
+# Vagrant CentOS-7 VirtualBox with Docker-based JupyterHub and Jupyter Notebooks
 
 This turnkey Virtual Machine (VM) set up framework was created as a template for creating an open data science platform for Ministry of Health informatics trainees to use in the lab (hands-on) section of informatics case studies. Assuming you are able to put in the right configuration items below, all you need to do is type "vagrant up" at the command line and after 10 minutes, you will have JupyterHub and Jupyter Notebook available on the browser. The duration of setup depends on bandwidth and host resources as the host downloads all the required files and provisions the VM hosting the [Docker](https://www.docker.com/) images.
 
