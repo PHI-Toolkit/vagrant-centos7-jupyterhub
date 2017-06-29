@@ -68,7 +68,7 @@ Once inside the VM (after "vagrant ssh") you can manage the JupyterHub and Jupyt
 
 ### JupyterHub Authentication
 
-Dummy Authentication is used (see jupyterhub_config.py settings). 
+[Dummy Authentication](https://github.com/yuvipanda/jupyterhub-dummy-authenticator) is used (see jupyterhub_config.py settings). 
 
 ### Post-launch action items
 After launching JupyterHub you can install the rest of the Python 2/3 modules and R. Launch a terminal from Jupyter Notebook, and on the command prompt, type:
