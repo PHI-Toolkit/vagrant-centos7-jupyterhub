@@ -82,7 +82,7 @@ After launching JupyterHub you can install the rest of the Python 2/3 modules an
 > ~/modules$ ./load-r-modules.sh
 
 ## JupyterLab
-You can switch to the new (alpha preview) JupyterLab user interface by switching "lab" for tree in the browser URL. Click on the Jupyter icon first, then switch "lab" for tree (see below).
+You can switch to the new (alpha preview) [JupyterLab](https://github.com/jupyterlab/jupyterlab) user interface by switching "lab" for tree in the browser URL. Click on the Jupyter icon first, then switch "lab" for tree (see below).
 
 
 ## Beyond testing...
