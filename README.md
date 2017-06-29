@@ -1,6 +1,6 @@
 # Vagrant Centos-7 VirtualBox with Docker-based JupyterHub and Jupyter Notebooks
 
-This VM was created as a template for the 2017 Growing Expertise in E-Health Knowledge and Skills (GEEKS) Program in Bangkok, Thailand to create an open data science platform for trainees to use on the case studies. Assuming you are able to put in the right configuration items below, all you need to do is type "vagrant up" at the command line and after 10 minutes, you will have JupyterHub and Jupyter Notebook available on the browser. The duration of setup depends on bandwidth and host resources as the host downloads all the required files and provisions the virtual machine hosting the Docker images.
+This turnkey Virtual Machine (VM) set up framework was created as a template for the 2017 Growing Expertise in E-Health Knowledge and Skills (GEEKS) Program in Bangkok, Thailand to create an open data science platform for trainees to use on the public health informatics case studies. Assuming you are able to put in the right configuration items below, all you need to do is type "vagrant up" at the command line and after 10 minutes, you will have JupyterHub and Jupyter Notebook available on the browser. The duration of setup depends on bandwidth and host resources as the host downloads all the required files and provisions the VM hosting the [Docker](https://www.docker.com/) images.
 
 ## Requirements behind this setup
 1. Centos-7 VM set up using [Vagrant](https://www.vagrantup.com/) (to replicate the GEEKS training server in Thailand)
