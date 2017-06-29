@@ -22,7 +22,8 @@ RUN echo `openssl rand -hex 32` > /etc/proxy_token
 
 COPY ./secrets/jupyterhub.crt $SSL_CERT
 COPY ./secrets/jupyterhub.key $SSL_KEY
-RUN chmod 700 /srv/jupyterhub/secrets && \
+RUN mkdir -p /data && \
+    chmod 700 /srv/jupyterhub/secrets && \
     chmod 600 /srv/jupyterhub/secrets/*
 
 COPY ./userlist /srv/jupyterhub/userlist

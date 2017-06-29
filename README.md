@@ -66,7 +66,12 @@ Once inside the VM (after "vagrant ssh") you can manage the JupyterHub and Jupyt
 
 "docker-compose up" brings up the JupyterHub server.
 
-To install the rest of the Python 2/3 modules and R, launch a terminal from Jupyter Notebook, and on the command prompt, type:
+### JupyterHub Authentication
+
+Dummy Authentication is used (see jupyterhub_config.py settings). 
+
+### Post-launch action items
+After launching JupyterHub you can install the rest of the Python 2/3 modules and R. Launch a terminal from Jupyter Notebook, and on the command prompt, type:
 
 > $ cd modules
 
@@ -75,6 +80,9 @@ To install the rest of the Python 2/3 modules and R, launch a terminal from Jupy
 > ~/modules$ ./load-mran-r.sh
 
 > ~/modules$ ./load-r-modules.sh
+
+## JupyterLab
+You can switch to the new (alpha preview) JupyterLab user interface by switching "lab" for tree in the browser URL. Click on the Jupyter icon first, then switch "lab" for tree (see below).
 
 
 ## Beyond testing...

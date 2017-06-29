@@ -24,8 +24,10 @@ RUN apt-get update && \
       libmariadb-client-lgpl-dev mongodb-clients poppler-utils nano \
       postgresql-client sqlite3 mariadb-client python-mysqldb gdal-bin gfortran
 
-RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    chmod a+w -R /opt/conda && \
+RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+#RUN echo "jovyan:geeks@moph11000" | chpasswd && \
+#    usermod -aG sudo jovyan && \
+RUN chmod a+w -R /opt/conda && \
     conda install conda-build && \
     conda clean -tipsy
 
@@ -50,7 +52,7 @@ RUN mkdir -p /home/jovyan/work/notebooks && \
 COPY ./permissions.sh /srv/permissions.sh
 COPY ./notebooks/HelloWorld.ipynb /home/jovyan/work/
 COPY ./notebooks/Shared-Notebook.ipynb /home/jovyan/work/shared/
-COPY ./dockerfiles/*.sh /home/jovyan/work/modules/
+COPY ./modules/*.sh /home/jovyan/work/modules/
 
 RUN chmod a+w -R /home/jovyan/work/shared && \
     chmod a+w -R /home/jovyan/work/modules && \

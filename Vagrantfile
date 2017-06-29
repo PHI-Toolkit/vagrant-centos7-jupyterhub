@@ -19,16 +19,20 @@ Vagrant.configure("2") do |config|
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
-
+  #
+  # VIRTUALBOX GUEST ADDITIONS SYNCED: http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/
+  # On the host, type:
+  # $ vagrant install plugin vagrant-vbguest
+  #
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 443, host: 9443
-  config.vm.network "forwarded_port", guest: 8000, host: 8001
+  config.vm.network "forwarded_port", guest: 8000, host: 9000
 
   # Configure disk size
-  # Install vagrant disk-size plugin first (works only for Ubuntu):
+  # Install vagrant disk-size plugin first (works only for Ubuntu). On the host, type:
   # $ vagrant plugin install vagrant-disksize
   config.disksize.size = '100GB'
   # Create a private network, which allows host-only access to the machine

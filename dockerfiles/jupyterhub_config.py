@@ -60,7 +60,7 @@ c.JupyterHub.hub_port = 8080
 
 # Dummy Authenticator - use this for testing only
 c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
-c.DummyAuthenticator.password = "geeks@moph11000"
+#c.DummyAuthenticator.password = "geeks@moph11000"
 
 # Authenticate users with GitHub OAuth - use this for production
 #c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
