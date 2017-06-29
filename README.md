@@ -5,7 +5,7 @@ This VM was created as a template for the 2017 Growing Expertise in E-Health Kno
 ## Requirements behind this setup
 1. Centos-7 VM set up using Vagrant (to replicate the GEEKS training server in Thailand)
 2. JupyterHub with DockerSpawner
-3. Jupyter Notebook with Python 2 and 3 kernels
+3. [Jupyter](http://jupyter.org/) Notebook with Python 2 and 3 kernels
 4. Option to load more Python 2/3 modules and the R kernel
 
 ## Customizing Vagrantfile:
